@@ -11,9 +11,9 @@ add_executable(ref
   )
 
 add_executable(test_algebra
-  test_algebra.cpp
+  test_algebra.cpp vector.cpp
   )
 
 add_executable(test_performances
-  test_performances.cpp
+  test_performances.cpp vector.cpp
   )
