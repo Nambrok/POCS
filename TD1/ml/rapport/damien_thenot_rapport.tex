@@ -1,0 +1,74 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Rapport POCS : Travaux Pratique N\degres1}
+\author{Damien THENOT}
+\date{Novembre 2017}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+
+\usepackage{geometry}
+\geometry{hmargin=2.5cm,vmargin=1.5cm}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+J'ai travaillé avec : Robin FERON
+\end{center}
+
+\section{Introduction}
+Le but du TD était d'apprendre l'usage du C++ et de toucher un peu à un sujet très en vogue, le machine learning. Le but est d'effectuer un apprentissage à partir des données brutes pour pouvoir calculer le poids d'une personne à partir de sa taille, on a pour cela les données de 50 personnes dans un premier temps seulement des hommes et ensuite seulement des femmes, puis 100 personnes hommes et femmes mélangés.
+
+\section{Séparation des données}
+Comme dans les exercices précédent on sépare les données brutes dans différents tableaux, la différence est qu'ici nous avons aussi le sexe de la personne dont la taille et le poids sont issus et que la première colonne est rempli seulement de "1.0". Les données stockées se retrouvent dans un tableau de deux dimensions de taille m*3. Et les poids se retrouvent dans un tableau de taille m.
+
+\section{Implémentation de l'hypothèse de base}
+Nous implémentons ensuite l'hypothèse de base qui à partir des trois thétas et du sexe et de la taille calcule un poids hypothétique bien que les thétas que l'on donne ne permettent pas d'obtenir des résultats plausibles.
+
+\section{Calcul de coût $J(\theta)$}
+La fonction du calcul de coût à partir des thétas que l'on appelle computeCost 
+permet de déterminer à quel point les thétas sont correct pour calculer un poids théorique en utilisant les données réelles. On essaie de se rapprocher des valeurs réelles avec nos prédictions.
+
+\section{Calcul de la moyenne pour une caractéristique}
+Une fonction calculant la moyenne de toutes les données d'une caractéristique, nous pouvons ainsi obtenir la moyenne des tailles issus des données.
+\begin{center}
+$\frac{\sum Tailles}{Nombre De Donnees}$
+\end{center}
+
+\section{Calcul de l'écart-type d'une caractéristique}
+C'est une fonction calculant l'écart-type des données à l'aide de la moyenne. 
+Avec $\mu$ la moyenne de la caractéristique et $m$ le nombre donné.
+\begin{center}
+$\sqrt{\frac{1}{m - 1}\sum_{i=1}^{m}(x_{i} - \mu)^{2}}$
+\end{center}
+
+\section{Normalisation d'une caractéristique}
+Pour obtenir des résultats cohérents nous devons normaliser les caractéristiques par rapport aux autres. Le sexe se trouvant déjà être $0.0$ ou $1.0$ nous devons surtout nous occuper des tailles qui peuvent avoir des valeurs très différentes. Nous utilisons donc la moyenne et l'écart-type calculé grâce aux fonctions précédentes pour normaliser chaque taille.
+On a $x$ une taille en cm, $\mu$ la moyenne des tailles et $\sigma$ l'écart-type, $\frac{x - \mu}{\sigma}$.
+Nous remplaçons chaque valeur directement dans le tableau par sa version normalisée.
+
+\section{Minimisation de $J(\theta)$}
+Le but de la minimisation de $J(\theta)$ est de trouver des thétas nous permettant de trouver des poids calculés les plus proches de la réalité.
+Nous affinons les valeurs de théta et on se sert de computeCost pour montrer les résultats de la minimisation dans le fichier ``cost.txt``, on voit ainsi que les thétas bougeant au début rapidement puis de moins en moins pour arriver à des valeurs de thétas stable donnant des résultats probables aux prédictions.
+
+\section{Nouvelle hypothèse}
+Pour utiliser l'apprentissage sur les données et obtenir des prédictions correct pour une entrée, nous avons besoin d'utiliser les thétas minimiser, mais il faut aussi normaliser la taille entrée. J'ai d'abord recalculer la moyenne et l'écart-type des données pour normaliser la taille mais j'obtenais des résultats éloignés de mes attentes. J'ai rapidement trouvé qu'il fallait utiliser les moyennes et écart-type des données avant normalisation pour normaliser l'entrée et obtenir des résultats plus logiques. Il est facile d'imaginer que tenter de normaliser l'entrée avec les moyennes et écart-type de données déjà normalisés crée des problèmes.
+
+
+\section{Factoriser du code entre les différents exercices}
+Les ressemblances entre les différentes parties sont très fortes, les différences étant l'ajout d'un nouveau paramètre donc d'un thétas pour prendre en compte ce paramètre et de jeux de données brutes différentes. Si nous souhaitons utiliser le code produit lors de l'exercice 2 en utilisant les données issues du premier exercice, nous devons identifier le sexe des personnes utilisant ces données et peut-être donner une façon au programme de charger des données venant de l'extérieur et n'étant pas codé en dur dans le code source.
+
+\section{Conclusion}
+Les difficultés du projet était les nouvelles notions du machine learning, le traitement des données par exemple la normalisation de celle-ci. Certains résultats étaient difficiles à vérifier sans comparer avec d'autres étudiants, sans les bons thétas ceux-ci ne représentait pas des poids réels dans les projections, mais après la minimisation des thétas les résultats semblaient avoir leur logique et donnant des résultats vraisemblables.
+
+
+
+\bibliographystyle{plain}
+\end{document}
+
