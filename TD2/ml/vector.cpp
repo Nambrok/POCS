@@ -14,6 +14,19 @@ ml::vector::vector(const std::size_t size){
         //5) Le constructeur est appeler trois fois une fois à chaque opérateurs une version temporaire avec les résultats de chaque opération est crée avant d'être utilisé puis supprimer
 }
 
+ml::vector::vector(){
+}
+
+void ml::vector::creation(const std::size_t size){
+        vect = new double[size]();
+        this->taille = size;
+
+        //Initialisation
+        for(int i = 0; i<size; i++) {
+                this->vect[i] = 0;
+        }
+}
+
 std::size_t ml::vector::size() const {
         return this->taille;
 }
@@ -96,7 +109,7 @@ ml::vector ml::vector::operator*(const ml::vector& oldVector){
 
 double ml::vector::dot(const vector &oldVector) const {
         assert(this->size() == oldVector.size());
-        double somme;
+        double somme = 0;
         for(int i = 0; i<oldVector.size(); i++) {
                 somme += this->vect[i] * oldVector[i];
         }

@@ -17,6 +17,8 @@ std::size_t taille;
 
 public:
 vector(const std::size_t);
+vector();
+void creation(const std::size_t);
 ~vector();
 std::size_t size() const;
 double& operator[](const std::size_t);

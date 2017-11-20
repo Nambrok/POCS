@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "vector.h"
+#include "matrix.h"
 
 int main()
 {
@@ -34,6 +35,14 @@ int main()
         std::cout << "test de ml::version1::matrix" << std::endl;
 
         // TODO
+        ml::version1::matrix mat(2, 3);
+        mat(0,0) = 1; mat(0,1) = 3; mat(0, 2) = 5;
+        mat(1, 0) = 2; mat(1, 1) = 4; mat(1, 2) = 6;
+
+
+        std::cout << mat << std::endl;
+
+        std::cout << mat.transpose() << std::endl;
 
         std::cout << "test de ml::version2::matrix" << std::endl;
 
