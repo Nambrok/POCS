@@ -10,8 +10,10 @@ ml::matrix_base& ml::matrix_base::operator=(double d){
 }
 
 ml::vector ml::matrix_base::operator*(const vector& v) const {
+        //TODO: ça marche pas ça et y'a une ligne en trop
+
         assert(this->size_y() == v.size());
-        ml::vector res(v.size());
+        ml::vector res(this->size_x());
         for(int i = 0; i<this->size_x(); i++) {
                 for(int j = 0; j<this->size_y(); j++) {
                         res[i] += this->operator()(i, j) * v[j];

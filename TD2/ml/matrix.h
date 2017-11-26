@@ -21,6 +21,7 @@ matrix_base& operator=(double);
 vector operator*(const vector& v) const;
 virtual std::ostream& print(std::ostream&) const = 0;
 //std::ostream& operator<<(std::ostream&, const matrix_base&);
+//TODO: Manque les destructeurs
 };
 
 namespace version1 {
@@ -36,6 +37,7 @@ double& operator()(const std::size_t, const std::size_t);
 const double& operator()(const std::size_t, const std::size_t) const;
 std::ostream& print(std::ostream&) const;
 //std::ostream& operator<<(std::ostream&, const matrix&);
+//Manque les destructeurs
 
 
 class transpose_matrix : public matrix_base {
