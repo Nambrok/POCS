@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.7.2)
 
 project(tp2 VERSION 1.0 LANGUAGES CXX)
 
+
 # compilation c++14
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -11,9 +12,17 @@ add_executable(ref
   )
 
 add_executable(test_algebra
-  test_algebra.cpp vector.cpp matrix.cpp
+  test_algebra.cpp vector.cpp matrix.cpp matrixv1.cpp
   )
 
 add_executable(test_performances
-  test_performances.cpp vector.cpp
+  test_performances.cpp vector.cpp matrix.cpp matrixv1.cpp
   )
+
+add_executable(m1
+  m1.cpp vector.cpp matrixv1.cpp
+  )
+
+
+target_compile_options(test_algebra PUBLIC -Wall)
+target_compile_options(test_algebra PUBLIC -Wall)

@@ -2,6 +2,7 @@
 
 #include "vector.h"
 #include "matrix.h"
+#include "matrixv1.h"
 
 int main()
 {
@@ -35,22 +36,29 @@ int main()
         std::cout << "test de ml::version1::matrix" << std::endl;
 
 
-        // ml::version1::matrix yo(5, 3);
+        ml::version1::matrix mat1(2, 3);
+        mat1(0,0) = 1; mat1(0,1) = 2; mat1(0, 2) = 3;
+        mat1(1, 0) = 4; mat1(1, 1) = 5; mat1(1, 2) = 6;
+
+
+        std::cout << mat1 << std::endl;
+        std::cout << mat1.transpose() << std::endl;
+        std::cout << mat1 * v << std::endl;
+
+        std::cout << "test de ml::version2::matrix" << std::endl;
+        // ml::version2::matrix yo(5, 3);
         //
         // std::cout << yo << std::endl;
 
-        ml::version1::matrix mat(2, 3);
-        mat(0,0) = 1; mat(0,1) = 3; mat(0, 2) = 5;
-        mat(1, 0) = 2; mat(1, 1) = 4; mat(1, 2) = 6;
-
+        ml::version2::matrix mat(2, 3);
+        mat(0,0) = 1; mat(0,1) = 2; mat(0, 2) = 3;
+        mat(1, 0) = 4; mat(1, 1) = 5; mat(1, 2) = 6;
 
         std::cout << mat << std::endl;
-
         std::cout << mat.transpose() << std::endl;
+        std::cout << mat * v << std::endl;
 
-        std::cout << mat * u << std::endl;
-
-        std::cout << "test de ml::version2::matrix" << std::endl;
+        std::cout << "test de ml::version3::matrix" << std::endl;
 
         // TODO
 
