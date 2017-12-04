@@ -19,10 +19,13 @@ add_executable(test_performances
   test_performances.cpp vector.cpp matrix.cpp matrixv1.cpp
   )
 
-add_executable(m1
-  m1.cpp vector.cpp matrixv1.cpp
+add_executable(ml
+  ml.cpp vector.cpp matrixv1.cpp matrix.cpp
   )
 
+file(COPY ${CMAKE_CURRENT_SRC_DIR}data.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 target_compile_options(test_algebra PUBLIC -Wall)
-target_compile_options(test_algebra PUBLIC -Wall)
+target_compile_options(test_performances PUBLIC -Wall)
+target_compile_options(ml PUBLIC -Wall)
+target_compile_options(ml PUBLIC -g)

@@ -16,6 +16,7 @@ double ** mat;
 
 public:
 matrix(const std::size_t x, const std::size_t y);
+matrix(const matrix&) = delete;
 std::size_t size_x() const;
 std::size_t size_y() const;
 double& operator()(const std::size_t, const std::size_t);
@@ -24,7 +25,7 @@ matrix& operator=(double);
 vector operator*(const vector& v) const;
 std::ostream& print(std::ostream&) const;
 //std::ostream& operator<<(std::ostream&, const matrix_base&);
-matrix transpose();
+matrix& transpose();
 ~matrix();
 };
 std::ostream& operator<<(std::ostream&, const matrix&);

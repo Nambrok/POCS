@@ -53,15 +53,15 @@ const double& ml::version1::matrix::operator()(const std::size_t i, const std::s
         return this->mat[i][j];
 }
 
-ml::version1::matrix ml::version1::matrix::transpose(){
-        ml::version1::matrix newMat(this->size_y(), this->size_x());
+ml::version1::matrix& ml::version1::matrix::transpose(){
+        ml::version1::matrix * newMat = new ml::version1::matrix(this->size_y(), this->size_x());
 
         for(unsigned int i = 0; i<this->size_x(); i++) {
                 for(unsigned int j = 0; j<this->size_y(); j++) {
-                        newMat(j, i) = this->operator()(i, j);
+                        newMat->operator()(j, i) = this->operator()(i, j);
                 }
         }
-        return newMat;
+        return *newMat;
 }
 
 ml::version1::matrix::~matrix(){
