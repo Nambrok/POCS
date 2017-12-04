@@ -13,11 +13,10 @@ private:
 double * vect;
 std::size_t taille;
 
-//TODO: Remplacer les if pour les size par des assert
-
 public:
 vector(const std::size_t);
 vector();
+vector(const vector&);
 void creation(const std::size_t);
 ~vector();
 std::size_t size() const;

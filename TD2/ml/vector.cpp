@@ -10,11 +10,20 @@ ml::vector::vector(const std::size_t size){
         }
 
         //std::cerr << "Construction" << std::endl;
-        //std::cout << "u = " << (v + v * 2.0 * v) << std::endl;
         //5) Le constructeur est appeler trois fois une fois à chaque opérateurs une version temporaire avec les résultats de chaque opération est crée avant d'être utilisé puis supprimer
 }
 
 ml::vector::vector(){
+}
+
+ml::vector::vector(const vector& oldVector){
+        this->vect = new double[oldVector.size()]();
+        this->taille = oldVector.size();
+
+        //Initialisation
+        for(auto i = 0u; i<oldVector.size(); i++) {
+                this->vect[i] = oldVector[i];
+        }
 }
 
 void ml::vector::creation(const std::size_t size){
@@ -129,7 +138,7 @@ double ml::vector::squaredNorm() const {
         for(auto i = 0u; i<this->size(); i++) {
                 v3[i] = this->vect[i] * this->vect[i];
         }
-        return std::sqrt(v3.sum());
+        return v3.sum();
 }
 
 std::ostream& ml::vector::print(std::ostream& out) const {
