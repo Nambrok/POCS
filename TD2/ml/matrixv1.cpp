@@ -1,8 +1,8 @@
 #include "matrixv1.h"
 
 ml::version1::matrix& ml::version1::matrix::operator=(double d){
-        for(unsigned int i = 0; i < this->size_x(); i++) {
-                for(unsigned int j = 0; j < this->size_y(); j++) {
+        for(unsigned int i = 0; i < this->rows(); i++) {
+                for(unsigned int j = 0; j < this->cols(); j++) {
                         this->operator()(i, j) = d;
                 }
         }
@@ -10,10 +10,10 @@ ml::version1::matrix& ml::version1::matrix::operator=(double d){
 }
 
 ml::vector ml::version1::matrix::operator*(const vector& v) const {
-        assert(this->size_y() == v.size());
-        ml::vector res(this->size_x());
-        for(unsigned int i = 0; i<this->size_x(); i++) {
-                for(unsigned int j = 0; j<this->size_y(); j++) {
+        assert(this->cols() == v.size());
+        ml::vector res(this->rows());
+        for(unsigned int i = 0; i<this->rows(); i++) {
+                for(unsigned int j = 0; j<this->cols(); j++) {
                         res[i] += this->operator()(i, j) * v[j];
                 }
         }
@@ -21,8 +21,8 @@ ml::vector ml::version1::matrix::operator*(const vector& v) const {
 }
 
 ml::version1::matrix::matrix(const std::size_t x, const std::size_t y){
-        this->x = x;
-        this->y = y;
+        this->NbRows = x;
+        this->NbCols = y;
         mat = new double*[x];
         for(unsigned int i = 0; i<x; i++) {
                 mat[i] = new double[y];
@@ -35,29 +35,29 @@ ml::version1::matrix::matrix(const std::size_t x, const std::size_t y){
         }
 }
 
-std::size_t ml::version1::matrix::size_x() const {
-        return this->x;
+std::size_t ml::version1::matrix::rows() const {
+        return this->NbRows;
 }
 
-std::size_t ml::version1::matrix::size_y() const {
-        return this->y;
+std::size_t ml::version1::matrix::cols() const {
+        return this->NbCols;
 }
 
 double& ml::version1::matrix::operator()(const std::size_t i, const std::size_t j){
-        assert(i < this->size_x() && j < this->size_y());
+        assert(i < this->rows() && j < this->cols());
         return this->mat[i][j];
 }
 
 const double& ml::version1::matrix::operator()(const std::size_t i, const std::size_t j) const {
-        assert(i < this->size_x() && j < this->size_y());
+        assert(i < this->rows() && j < this->cols());
         return this->mat[i][j];
 }
 
 ml::version1::matrix& ml::version1::matrix::transpose(){
-        ml::version1::matrix * newMat = new ml::version1::matrix(this->size_y(), this->size_x());
+        ml::version1::matrix * newMat = new ml::version1::matrix(this->cols(), this->rows());
 
-        for(unsigned int i = 0; i<this->size_x(); i++) {
-                for(unsigned int j = 0; j<this->size_y(); j++) {
+        for(unsigned int i = 0; i<this->rows(); i++) {
+                for(unsigned int j = 0; j<this->cols(); j++) {
                         newMat->operator()(j, i) = this->operator()(i, j);
                 }
         }
@@ -65,15 +65,15 @@ ml::version1::matrix& ml::version1::matrix::transpose(){
 }
 
 ml::version1::matrix::~matrix(){
-        for(unsigned int i = 0; i<this->size_x(); i++) {
+        for(unsigned int i = 0; i<this->rows(); i++) {
                 delete[] this->mat[i];
         }
         delete[] this->mat;
 }
 
 std::ostream& ml::version1::matrix::print(std::ostream& os) const {
-        for(unsigned int i = 0; i<this->size_x(); i++) {
-                for(unsigned int j = 0; j<this->size_y(); j++) {
+        for(unsigned int i = 0; i<this->rows(); i++) {
+                for(unsigned int j = 0; j<this->cols(); j++) {
                         os << this->operator()(i, j) << " ";
                 }
                 os << std::endl;

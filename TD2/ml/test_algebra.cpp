@@ -58,9 +58,17 @@ int main()
         std::cout << mat.transpose() << std::endl;
         std::cout << mat * v << std::endl;
 
-        std::cout << "test de ml::version3::matrix" << std::endl;
+        {
+                std::cout << "test de ml::version3::matrix" << std::endl;
 
-        // TODO
+                ml::version3::matrix mat(2, 3);
+                mat(0,0) = 1; mat(0,1) = 2; mat(0, 2) = 3;
+                mat(1, 0) = 4; mat(1, 1) = 5; mat(1, 2) = 6;
+
+                std::cout << mat << std::endl;
+                std::cout << mat.transpose() << std::endl;
+                std::cout << mat * v << std::endl;
+        }
 
         return 0;
 }

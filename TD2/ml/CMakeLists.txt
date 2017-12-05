@@ -7,6 +7,9 @@ project(tp2 VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+
+
 add_executable(ref
   ref.cpp
   )
@@ -22,6 +25,7 @@ add_executable(test_performances
 add_executable(ml
   ml.cpp vector.cpp matrixv1.cpp matrix.cpp
   )
+target_link_libraries(ml Eigen3::Eigen)
 
 file(COPY ${CMAKE_CURRENT_SRC_DIR}data.txt DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 

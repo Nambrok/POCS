@@ -10,15 +10,15 @@ namespace ml {
 namespace version1 {
 class matrix {
 private:
-std::size_t x;
-std::size_t y;
+std::size_t NbRows;
+std::size_t NbCols;
 double ** mat;
 
 public:
 matrix(const std::size_t x, const std::size_t y);
 matrix(const matrix&) = delete;
-std::size_t size_x() const;
-std::size_t size_y() const;
+std::size_t rows() const;
+std::size_t cols() const;
 double& operator()(const std::size_t, const std::size_t);
 const double& operator()(const std::size_t, const std::size_t) const;
 matrix& operator=(double);
