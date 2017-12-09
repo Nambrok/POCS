@@ -23,14 +23,14 @@ ml::vector ml::version1::matrix::operator*(const vector& v) const {
 ml::version1::matrix::matrix(const std::size_t x, const std::size_t y){
         this->NbRows = x;
         this->NbCols = y;
-        mat = new double*[x];
-        for(unsigned int i = 0; i<x; i++) {
-                mat[i] = new double[y];
+        this->mat = new double*[x];
+        for(auto i = 0u; i<x; i++) {
+                this->mat[i] = new double[y];
         }
 
-        for(unsigned int i = 0; i<x; i++) {
-                for(unsigned int j = 0; j<y; j++) {
-                        mat[i][j] = 0;
+        for(auto i = 0u; i<x; i++) {
+                for(auto j = 0u; j<y; j++) {
+                        this->mat[i][j] = 0;
                 }
         }
 }
@@ -53,15 +53,15 @@ const double& ml::version1::matrix::operator()(const std::size_t i, const std::s
         return this->mat[i][j];
 }
 
-ml::version1::matrix& ml::version1::matrix::transpose(){
-        ml::version1::matrix * newMat = new ml::version1::matrix(this->cols(), this->rows());
+ml::version1::matrix ml::version1::matrix::transpose(){
+        ml::version1::matrix newMat(this->cols(), this->rows());
 
         for(unsigned int i = 0; i<this->rows(); i++) {
                 for(unsigned int j = 0; j<this->cols(); j++) {
-                        newMat->operator()(j, i) = this->operator()(i, j);
+                        newMat(j, i) = this->operator()(i, j);
                 }
         }
-        return *newMat;
+        return newMat;
 }
 
 ml::version1::matrix::~matrix(){
@@ -84,4 +84,19 @@ std::ostream& ml::version1::matrix::print(std::ostream& os) const {
 std::ostream& ml::version1::operator<<(std::ostream& os, const ml::version1::matrix& mat){
         mat.print(os);
         return os;
+}
+
+ml::version1::matrix::matrix(const ml::version1::matrix& oldMat){
+        this->NbRows = oldMat.rows();
+        this->NbCols = oldMat.cols();
+        mat = new double*[oldMat.rows()];
+        for(unsigned int i = 0; i<oldMat.rows(); i++) {
+                mat[i] = new double[oldMat.cols()];
+        }
+
+        for(unsigned int i = 0; i<oldMat.rows(); i++) {
+                for(unsigned int j = 0; j<oldMat.cols(); j++) {
+                        mat[i][j] = 0;
+                }
+        }
 }

@@ -15,13 +15,12 @@
 template <typename M, typename V>
 V hypothesis(const M &X, const V &theta) {
         assert(theta.size() == X.cols());
-
-        return X * theta;
+        return X*theta;
 }
 
 template <typename M, typename V>
 double computeCost(const M &X, const V &y, const V &theta) {
-        const auto h = hypothesis(X, theta) - y;
+        const V h = hypothesis(X, theta) - y;
         return 1.0 / (2.0 * h.size()) * h.squaredNorm();
 }
 
@@ -42,7 +41,7 @@ double computeStd(const M &X, const double mu, int i) {
         for (auto j = 0u; j < X.rows(); j++) {
                 sigma += std::pow((X(j, i) - mu), 2);
         }
-        return std::sqrt(sigma / (X.rows() - 1));
+        return std::sqrt(sigma / (X.rows() - 1.0));
 }
 
 template <typename M>
@@ -65,7 +64,7 @@ void gradientDescent(M &X, V &y, V &theta, double alpha, int iteration) {
         }
 }
 
-int main() {
+int main(){
         {
                 std::cout << "Test avec ml::version1::matrix : " << std::endl;
                 auto start = std::chrono::system_clock::now();
@@ -105,29 +104,25 @@ int main() {
                         theta1[0] = 1.;
                         theta1[1] = 2.;
                         theta1[2] = 3.;
-                        std::cout << "verification hypothesis(x[11],theta1) = "
-                                  << hypothesis(X, theta1)[11] << std::endl;
+                        std::cout << "verification hypothesis(x[11],theta1) = " << hypothesis(X, theta1)[11] << std::endl;
                         // double theta2[] = { 2., 2.5, 3.5 };
                         ml::vector theta2(3);
                         theta2[0] = 2.;
                         theta2[1] = 2.5;
                         theta2[2] = 3.5;
-                        std::cout << "verification hypothesis(x[33],theta2) = "
-                                  << hypothesis(X, theta2)[33] << std::endl;
+                        std::cout << "verification hypothesis(x[33],theta2) = " << hypothesis(X, theta2)[33] << std::endl;
                         // double theta3[] = { 0.5, 2.9, 3.9 };
                         ml::vector theta3(3);
                         theta3[0] = 0.5;
                         theta3[1] = 2.9;
                         theta3[2] = 3.9;
-                        std::cout << "verification hypothesis(x[55],theta3) = "
-                                  << hypothesis(X, theta3)[55] << std::endl;
+                        std::cout << "verification hypothesis(x[55],theta3) = " << hypothesis(X, theta3)[55] << std::endl;
                         // double theta4[] = { 4.9, 2.2, 1.1 }
                         ml::vector theta4(3);
-                        theta1[0] = 4.9;
-                        theta1[1] = 2.2;
-                        theta1[2] = 1.1;
-                        std::cout << "verification hypothesis(x[77],theta4) = "
-                                  << hypothesis(X, theta4)[77] << std::endl;
+                        theta4[0] = 4.9;
+                        theta4[1] = 2.2;
+                        theta4[2] = 1.1;
+                        std::cout << "verification hypothesis(x[77],theta4) = " << hypothesis(X, theta4)[77] << std::endl;
                 }
 
                 { // verification de la fonction de cout
@@ -156,6 +151,7 @@ int main() {
                         std::cout << "verification computeCost(x,y,theta4) = "
                                   << computeCost(X, y, theta4) << std::endl;
                 }
+
 
                 std::cout << "recherche des paramètres theta optimaux" << std::endl;
 
@@ -270,9 +266,9 @@ int main() {
                                   << hypothesis(X, theta3)[55] << std::endl;
                         // double theta4[] = { 4.9, 2.2, 1.1 }
                         ml::vector theta4(3);
-                        theta1[0] = 4.9;
-                        theta1[1] = 2.2;
-                        theta1[2] = 1.1;
+                        theta4[0] = 4.9;
+                        theta4[1] = 2.2;
+                        theta4[2] = 1.1;
                         std::cout << "verification hypothesis(x[77],theta4) = "
                                   << hypothesis(X, theta4)[77] << std::endl;
                 }
@@ -416,9 +412,9 @@ int main() {
                                   << hypothesis(X, theta3)[55] << std::endl;
                         // double theta4[] = { 4.9, 2.2, 1.1 }
                         ml::vector theta4(3);
-                        theta1[0] = 4.9;
-                        theta1[1] = 2.2;
-                        theta1[2] = 1.1;
+                        theta4[0] = 4.9;
+                        theta4[1] = 2.2;
+                        theta4[2] = 1.1;
                         std::cout << "verification hypothesis(x[77],theta4) = "
                                   << hypothesis(X, theta4)[77] << std::endl;
                 }
@@ -563,9 +559,9 @@ int main() {
                                   << hypothesis(X, theta3)[55] << std::endl;
                         // double theta4[] = { 4.9, 2.2, 1.1 }
                         Eigen::VectorXd theta4(3);
-                        theta1[0] = 4.9;
-                        theta1[1] = 2.2;
-                        theta1[2] = 1.1;
+                        theta4[0] = 4.9;
+                        theta4[1] = 2.2;
+                        theta4[2] = 1.1;
                         std::cout << "verification hypothesis(x[77],theta4) = "
                                   << hypothesis(X, theta4)[77] << std::endl;
                 }

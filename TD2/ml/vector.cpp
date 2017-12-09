@@ -57,6 +57,8 @@ ml::vector& ml::vector::operator=(const vector& oldVector){
 }
 
 ml::vector& ml::vector::operator=(double val){
+        delete[] vect;
+        vect = new double[this->size()]();
         for(auto i = 0u; i < this->size(); i++) {
                 this->vect[i] = val;
         }
@@ -65,17 +67,26 @@ ml::vector& ml::vector::operator=(double val){
 
 ml::vector& ml::vector::operator+=(const vector& oldVector){
         assert(this->size() == oldVector.size());
+
+        double * newVect = new double[oldVector.size()]();
         for(auto i = 0u; i<oldVector.size(); i++) {
-                this->vect[i] += oldVector[i];
+                newVect[i] = this->vect[i] + oldVector[i];
         }
+
+        delete[] vect;
+        vect = newVect;
         return *this;
 }
 
 ml::vector& ml::vector::operator-=(const vector& oldVector){
         assert(this->size() == oldVector.size());
+
+        double * newVect = new double[oldVector.size()]();
         for(auto i = 0u; i<oldVector.size(); i++) {
-                this->vect[i] -= oldVector[i];
+                newVect[i] = this->vect[i] - oldVector[i];
         }
+        delete[] vect;
+        vect = newVect;
         return *this;
 }
 
